@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+int main() {
+    // Write your main here
+    int counter; 
+    string userInformation;
+    string::size_type pos = 0;
+    string::size_type substrLen;
+
+   cout << "Please enter the following information: Name, SSN, username(no spaces required), and password(no spaces required): " << endl;
+
+   getline(cin,userInformation);
+
+   cout << endl;
+   for(counter=0; counter < 9; counter++)
+   {
+     pos = userInformation.find_first_of("0123456789", pos);
+     userInformation.replace(pos, 1,"x");
+   }
+   pos = userInformation.find("", pos);
+   pos = userInformation.find("", pos + 1);
+
+   string temp = userInformation.substr(pos,20);
+    substrLen = temp.length();
+    temp = ""; 
+   for(string::size_type counter=0; counter < substrLen - 1; counter++)
+   {
+      temp.append("x");
+
+   }
+   userInformation.replace(pos + 1,substrLen,temp);
+   
+  cout << userInformation << endl;
+    return 0;
+}
